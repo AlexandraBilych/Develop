@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=user>
+   <h1>Hi, Champion!</h1>
+  </ul>
+    <br>{{form.search}}<br>
+    <p><input type="submit" value="Search"></p>
+  <ul1 class=Authors>
+  {% for entry in Authors %}
+    <li><em>k{{Authors.name}}</em>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul1>
+  <ul1 class=Books>
+  {% for entry in Books %}
+    <li><em>{{ Books.id}} : {{ Books.name|safe }}</em>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul1>
+{% endblock %}
