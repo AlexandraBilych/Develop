@@ -16,4 +16,3 @@ from app.module.view import search # - blueprint
 # Register blueprint(s)
 app.register_blueprint(search)
 
-db.create_all()

@@ -3,20 +3,29 @@
   <ul class=user>
    <h1>Hi, Champion!</h1>
   </ul>
-    <br>{{form.search}}<br>
-    <p><input type="submit" value="Search"></p>
-  <ul1 class=Authors>
-  {% for entry in Authors %}
-    <li><em>k{{Authors.name}}</em>
+  <h2>&nbsp;</h2>
+  <h3>&nbsp;</h3>
+  <div id="left">
+     <p><br>{{form.search}}<br></p>
+     <p><input type="submit" value="Search"></p>
+  </div>
+  <div id="right">
+     <p> <ull class=a>
+      <p>Author:</p>
+  {% for entry in a %}
+    <li><p><em>{{entry.name}}</em></p>
   {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
+    <li><p><em>Unbelievable.  No entries here so far</em></p>
   {% endfor %}
-  </ul1>
+  </ull>
   <ul1 class=Books>
+      <p>&nbsp;</p>
+      <p>Book:</p>
   {% for entry in Books %}
-    <li><em>{{ Books.id}} : {{ Books.name|safe }}</em>
+    <li><p><em>{{entry.name}}</em></p>
   {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
+    <li><p><em>Unbelievable.  No entries here so far</em></p>
   {% endfor %}
-  </ul1>
+   </ul1></p>
+   </div>
 {% endblock %}

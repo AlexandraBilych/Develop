@@ -1,173 +1,173 @@
-AUTHOR_ID,AUTHOR_NAME
-1,A. A. Milne
-2,Adam Hargreaves
-3,Agatha Christie
-4,Albert Camus
-5,Alex Comfort
-6,Alexander Alexandrovich Fadeyev
-7,Alice Sebold
-8,Ann Martin
-9,Anna Sewell
-10,Anne Frank
-11,Anne Rice
-12,Antoine de Saint-Exupery
-13,Arlene Eisenberg
-14,Astrid Lindgren
-15,Barbara Park
-16,Beatrix Potter
-17,Beverly Cleary
-18,Brandon Sanderson
-19,C. S. Lewis
-20,Carlo Collodi
-21,Charles Dickens
-22,Charles M. Sheldon
-23,Chinua Achebe
-24,Christopher Awdry
-25,Christopher Paolini
-26,Clive Cussler
-27,Colleen McCullough
-28,Dale Carnegie
-29,Dan Brown
-30,Dante Alighieri
-31,Desmond Morris
-32,Dick Bruna
-33,Douglas Adams
-34,Dr. Seuss
-35,Dr. Benjamin Spock
-36,E. L. James
-37,E.B. White
-38,Edgar Rice Burroughs
-39,EL James
-40,Elbert Hubbard
-41,Elie Wiesel
-42,Elisabetta Dami
-43,Enid Blyton
-44,Eric Carle
-45,Erica Jong
-46,Erich Segal
-47,Erle Stanley Gardner
-48,Ernest Hemingway
-49,Erskine Caldwell
-50,F. Scott Fitzgerald
-51,Francine Pascal
-52,Frank Herbert
-53,Gabriel Garcia Marquez
-54,Garth Williams
-55,George Orwell
-56,George R. R. Martin
-57,Gilbert Delahaye
-58,Gilbert Patten
-59,Grace Metalious
-60,H. Rider Haggard
-61,Hal Lindsey
-62,Harper Lee
-63,Haruki Murakami
-64,Heidi Murkoff
-65,Ian Fleming
-66,J. D. Salinger
-67,J. K. Rowling
-68,J. P. Donleavy
-69,J. R. R. Tolkien
-70,J.K. Rowling
-71,Jack Canfield
-72,Jack Higgins
-73,Jacqueline Susann
-74,James Clavell
-75,James Patterson
-76,James Redfield
-77,Janette Sebring Lowrey
-78,Jean Bruce
-79,Jean M. Auel
-80,Jeff Kinney
-81,Jeffrey Archer
-82,Jerry B. Jenkins
-83,Jiang Rong
-84,Johanna Spyri
-85,John Gray
-86,John Green
-87,John Steinbeck
-88,Johnston McCulley
-89,Joseph Heller
-90,Jostein Gaarder
-91,Julia Donaldson
-92,Jung Chang
-93,Ken Follett
-94,Kenneth Grahame
-95,Khaled Hosseini
-96,Khalil Gibran
-97,Laura Ingalls Wilder
-98,Lee Child
-99,Lemony Snicket
-100,Leo Tolstoy
-101,Lew Wallace
-102,Lois Lowry
-103,Louise Hay
-104,Lucy Maud Montgomery
-105,Madeleine L'Engle
-106,Marabel Morgan
-107,Marcel Marlier
-108,Margaret Mitchell
-109,Margaret Wise Brown
-110,Marilyn French
-111,Mario Puzo
-112,Mark Twain
-113,Mark Victor Hansen
-114,Martin Handford
-115,Mary Pope Osborne
-116,Maurice Sendak
-117,Mercer Mayer
-118,Michael Bond
-119,Michael Connelly
-120,Michael Ende
-121,Mikhail Sholokhov
-122,Mitch Albom
-123,Napoleon Hill
-124,Nicholas Evans
-125,Nikolai Ostrovsky
-126,Norman Bridwell
-127,Norman Vincent Peale
-128,Osamu Dazai
-129,Paulo Coelho
-130,Peter Benchley
-131,Pierre Dukan
-132,R. L. Stine
-133,Raymond Moody
-134,Rev. W. Awdry
-135,Rhonda Byrne
-136,Richard Adams
-137,Richard Bach
-138,Richard Nelson Bolles
-139,Rick Warren
-140,Roald Dahl
-141,Robert James Waller
-142,Robert Jordan
-143,Robert L. Short
-144,Robert Munsch
-145,Roger Hargreaves
-146,S. E. Hinton
-147,Sam McBratney
-148,Sergey Mikhalkov
-149,Shere Hite
-150,Spencer Johnson
-151,Stan and Jan Berenstain
-152,Stephen Hawking
-153,Stephen King
-154,Stephen R. Covey
-155,Stephenie Meyer
-156,Stieg Larsson
-157,Sue Townsend
-158,Suzanne Collins
-159,Taichi Sakaiya
-160,Terry Pratchett
-161,Thor Heyerdahl
-162,Tim LaHaye
-163,Umberto Eco
-164,V. C. Andrews
-165,Viktor Frankl
-166,Vladimir Nabokov
-167,Wayne Dyer
-168,William Bradford Huie
-169,William P. Young
-170,William Peter Blatty
-171,Xaviera Hollander
-172,Yann Martel
+name
+A. A. Milne
+Adam Hargreaves
+Agatha Christie
+Albert Camus
+Alex Comfort
+Alexander Alexandrovich Fadeyev
+Alice Sebold
+Ann Martin
+Anna Sewell
+Anne Frank
+Anne Rice
+Antoine de Saint-Exupery
+Arlene Eisenberg
+Astrid Lindgren
+Barbara Park
+Beatrix Potter
+Beverly Cleary
+Brandon Sanderson
+C. S. Lewis
+Carlo Collodi
+Charles Dickens
+Charles M. Sheldon
+Chinua Achebe
+Christopher Awdry
+Christopher Paolini
+Clive Cussler
+Colleen McCullough
+Dale Carnegie
+Dan Brown
+Dante Alighieri
+Desmond Morris
+Dick Bruna
+Douglas Adams
+Dr. Seuss
+Dr. Benjamin Spock
+E. L. James
+E.B. White
+Edgar Rice Burroughs
+EL James
+Elbert Hubbard
+Elie Wiesel
+Elisabetta Dami
+Enid Blyton
+Eric Carle
+Erica Jong
+Erich Segal
+Erle Stanley Gardner
+Ernest Hemingway
+Erskine Caldwell
+F. Scott Fitzgerald
+Francine Pascal
+Frank Herbert
+Gabriel Garcia Marquez
+Garth Williams
+George Orwell
+George R. R. Martin
+Gilbert Delahaye
+Gilbert Patten
+Grace Metalious
+H. Rider Haggard
+Hal Lindsey
+Harper Lee
+Haruki Murakami
+Heidi Murkoff
+Ian Fleming
+J. D. Salinger
+J. K. Rowling
+J. P. Donleavy
+J. R. R. Tolkien
+J.K. Rowling
+Jack Canfield
+Jack Higgins
+Jacqueline Susann
+James Clavell
+James Patterson
+James Redfield
+Janette Sebring Lowrey
+Jean Bruce
+Jean M. Auel
+Jeff Kinney
+Jeffrey Archer
+Jerry B. Jenkins
+Jiang Rong
+Johanna Spyri
+John Gray
+John Green
+John Steinbeck
+Johnston McCulley
+Joseph Heller
+Jostein Gaarder
+Julia Donaldson
+Jung Chang
+Ken Follett
+Kenneth Grahame
+Khaled Hosseini
+Khalil Gibran
+Laura Ingalls Wilder
+Lee Child
+Lemony Snicket
+Leo Tolstoy
+Lew Wallace
+Lois Lowry
+Louise Hay
+Lucy Maud Montgomery
+Madeleine L'Engle
+Marabel Morgan
+Marcel Marlier
+Margaret Mitchell
+Margaret Wise Brown
+Marilyn French
+Mario Puzo
+Mark Twain
+Mark Victor Hansen
+Martin Handford
+Mary Pope Osborne
+Maurice Sendak
+Mercer Mayer
+Michael Bond
+Michael Connelly
+Michael Ende
+Mikhail Sholokhov
+Mitch Albom
+Napoleon Hill
+Nicholas Evans
+Nikolai Ostrovsky
+Norman Bridwell
+Norman Vincent Peale
+Osamu Dazai
+Paulo Coelho
+Peter Benchley
+Pierre Dukan
+R. L. Stine
+Raymond Moody
+Rev. W. Awdry
+Rhonda Byrne
+Richard Adams
+Richard Bach
+Richard Nelson Bolles
+Rick Warren
+Roald Dahl
+Robert James Waller
+Robert Jordan
+Robert L. Short
+Robert Munsch
+Roger Hargreaves
+S. E. Hinton
+Sam McBratney
+Sergey Mikhalkov
+Shere Hite
+Spencer Johnson
+Stan and Jan Berenstain
+Stephen Hawking
+Stephen King
+Stephen R. Covey
+Stephenie Meyer
+Stieg Larsson
+Sue Townsend
+Suzanne Collins
+Taichi Sakaiya
+Terry Pratchett
+Thor Heyerdahl
+Tim LaHaye
+Umberto Eco
+V. C. Andrews
+Viktor Frankl
+Vladimir Nabokov
+Wayne Dyer
+William Bradford Huie
+William P. Young
+William Peter Blatty
+Xaviera Hollander
+Yann Martel
