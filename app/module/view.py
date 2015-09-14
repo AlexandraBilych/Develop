@@ -13,15 +13,41 @@ from app.module.models import Author, Book
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 
+main = Blueprint('main', __name__, url_prefix='/main')
 search = Blueprint('search', __name__, url_prefix='/search')
+
 # Set the route and accepted methods
-@search.route('/signin/', methods=['GET', 'POST'])
-def signin():
+@main.route('/', methods=['GET', 'POST'])
+def first():
     form = SearchForm()
-    query = db.session.query(Author).all()
-    a = json.dumps([
-    ( author.name, [book.name for book in author.b])
-        for author in db.session.query(Author).all()
-    ])
-    query1 = db.session.query(Book).all()
-    return render_template('show_entries.html', a=query, Books=query1, form=form)
+    a = [
+     {'b_name': book.name, 'a_name': [author.name for author in book.b]}
+        for book in db.session.query(Book).all()
+     ]
+    return render_template('show_entries.html', SearchBook=a, form=form)
+
+@search.route('/', methods=['GET','POST'])
+def find():
+    checked = request.args.get('criterion', '')
+    search_request =request.args.get('search', '')
+    if checked == 'value_book':
+        list = [
+            {'b_name': book.name, 'a_name': [author.name for author in book.b]}
+            for book in db.session.query(Book).\
+                filter(Book.name.contains(search_request)).all()
+            ]
+        return render_template('show_entries.html',\
+                               a=request.args.get('search', ''),\
+                               SearchBook=list,form=SearchForm())
+
+    elif checked == 'value_author':
+        list = [
+            {'a_name': author.name, 'b_name': [book.name for book in author.a]}
+            for author in db.session.query(Author).\
+                filter(Author.name.contains(search_request)).all()
+            ]
+        return render_template('show_entries.html',\
+                               a=request.args.get('search', ''),\
+                               SearchAuthor=list,\
+                               form=SearchForm(criterion='value_author'))
+

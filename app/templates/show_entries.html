@@ -1,31 +1,58 @@
 {% extends "layout.html" %}
 {% block body %}
-  <ul class=user>
-   <h1>Hi, Champion!</h1>
-  </ul>
-  <h2>&nbsp;</h2>
   <h3>&nbsp;</h3>
+
   <div id="left">
-     <p><br>{{form.search}}<br></p>
-     <p><input type="submit" value="Search"></p>
+      <form action="/search" method="get">
+          <p>
+              Search criteria:<br>
+              {{form.criterion}}
+          <p><br>{{form.search}}<br>
+          <input id="button1" type="submit" value="Search"></p>
+
+      </form>
   </div>
   <div id="right">
-     <p> <ull class=a>
-      <p>Author:</p>
-  {% for entry in a %}
-    <li><p><em>{{entry.name}}</em></p>
-  {% else %}
-    <li><p><em>Unbelievable.  No entries here so far</em></p>
-  {% endfor %}
-  </ull>
-  <ul1 class=Books>
-      <p>&nbsp;</p>
-      <p>Book:</p>
-  {% for entry in Books %}
-    <li><p><em>{{entry.name}}</em></p>
-  {% else %}
-    <li><p><em>Unbelievable.  No entries here so far</em></p>
-  {% endfor %}
-   </ul1></p>
-   </div>
+      <br>
+
+      <input type="button" id="Add" value="Add" />
+      <div id="output"></div>
+      <div id="overlay" class="web_dialog_overlay"></div>
+      <div id="dialog" class="web_dialog">
+          <h3>Add</h3>
+          <p>What do you want to add: </p>
+          <div id="brands">
+               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" /> Author
+               <input id="brand2" name="brand" type="radio" value="Sony" /> Book
+          </div>
+          <input id="btnSubmit" type="button" value="Submit" />
+      </div>
+
+      <button class="Edit" type="button">Edit</button>
+      <button class="Rem" type="button">Remove</button>
+      <p id="demo"></p>
+      <h3>Books:</h3>
+      <ull class=SearchBook>
+           <ol>
+           {% for entry in SearchBook %}
+               <tr><li><td><em>"{{entry['b_name']}}"</em><br>
+                   {% for a in entry['a_name'] %}
+                       <p>{{ a }}</p>
+                   {% endfor %}</td></li><br>
+               </tr>
+           {% endfor %}
+           </ol>
+      </ull>
+      <ull class=SearchAuthor>
+           <ol>
+           {% for entry in SearchAuthor %}
+               <tr><li><td><em>"{{entry['a_name']}}"</em><br>
+                   {% for b in entry['b_name'] %}
+                       <p>{{ b }}</p>
+                   {% endfor %}</td></li><br>
+               </tr>
+           {% endfor %}
+           </ol>
+      </ull>
+  </div>
 {% endblock %}

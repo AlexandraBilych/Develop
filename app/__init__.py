@@ -11,8 +11,8 @@ def not_found(error):
     return render_template('404.html'), 404
 # ADDDD template
 
-from app.module.view import search # - blueprint
+from app.module.view import main, search # - blueprint
 
 # Register blueprint(s)
+app.register_blueprint(main)
 app.register_blueprint(search)
-

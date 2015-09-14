@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
-
+    <script type="text/javascript" src="/static/jquery-2.1.4.min.js">
+    </script>
+    <script type="text/javascript" src="/static/button.js">
+    </script>
 </head>
 <body>
-  <h1>Electronic Resources</h1>
+  <a href="http://0.0.0.0:5000/main/">
+  <h1>Electronic Resources</h1></a>
   {% block body %}{% endblock %}
 </body>
 </html>
