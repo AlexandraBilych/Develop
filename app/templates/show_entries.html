@@ -6,32 +6,41 @@
       <form action="/search" method="get">
           <p>
               Search criteria:<br>
-              {{form.criterion}}
-          <p><br>{{form.search}}<br>
+              {{SearchForm.criterion}}
+          <p><br>{{SearchForm.search}}<br>
           <input id="button1" type="submit" value="Search"></p>
 
       </form>
   </div>
   <div id="right">
       <br>
+      <input type="button" id="Rem" value=" Remove " />
 
-      <input type="button" id="Add" value="Add" />
-      <div id="output"></div>
-      <div id="overlay" class="web_dialog_overlay"></div>
-      <div id="dialog" class="web_dialog">
-          <h3>Add</h3>
-          <p>What do you want to add: </p>
-          <div id="brands">
-               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" /> Author
-               <input id="brand2" name="brand" type="radio" value="Sony" /> Book
+       <div id="background" class='background_window'></div>
+          <div class='dialog_window' id="Window_rem">
+           <form action="/remove" method="get">
+           <a href='/main' id='btnClose'> Close </a>
+           <p> Enter the name:<br>
+              {{RemoveForm.rem_criterion}}
+           <p>
+               <input list="remove_name" id = {{RemoveForm.rem_name}}>
+
+               <datalist id="remove_name">
+                   {% for entry in data %}
+                   <option value=entry>
+                    {% endfor %}
+               </datalist>
+               <input id="button2" type="submit" value="Remove">
+           </p>
+           </form>
           </div>
-          <input id="btnSubmit" type="button" value="Submit" />
-      </div>
 
-      <button class="Edit" type="button">Edit</button>
-      <button class="Rem" type="button">Remove</button>
+      <input type="button" id="Edit" value="   Edit   " />
+      <input type="button" id="Add" value="   Add   " />
+
+
       <p id="demo"></p>
-      <h3>Books:</h3>
+      <h3 id="par1">Books:</h3>
       <ull class=SearchBook>
            <ol>
            {% for entry in SearchBook %}

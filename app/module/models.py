@@ -14,8 +14,8 @@ class Author(db.Model):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(db.String(128),  nullable=False,
                                             unique=True)
-    a = relationship("Book", secondary=association_table, backref='posts',\
-                           lazy='joined')
+    a = relationship("Book", passive_deletes=True, secondary=association_table, backref='posts',\
+                           lazy='dynamic')
     def __init__(self, name):
         self.name = name
 
@@ -29,8 +29,8 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128),  nullable=False,
                                             unique=True)
-    b = relationship("Author", secondary=association_table, backref='posts',\
-                           lazy='joined')
+    b = relationship("Author", passive_deletes=True, secondary=association_table, backref='posts',\
+                           lazy='dynamic')
 
 
     def __init__(self, name):

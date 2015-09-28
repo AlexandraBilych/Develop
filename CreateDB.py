@@ -63,13 +63,24 @@ a = [
 
 print(a)
 
-#for row in db.session.query(Book).all():
-#    print(row.id, row.name)
+row = db.session.query(Author).all()
+print(row)
+
+for row in db.session.query(Book).all():
+    print(row.id, row.name)
+
+#book = db.session.query(Book).filter(Book.name == 'Lolita').first()
+#print(book)
+#db.session.delete(book)
+#db.session.commit()
+
+for row in db.session.query(Book).all():
+    print(row.id, row.name)
 
 #for row in db.session.query(Book).options(joinedload('Book.b')).all():
 #     print(row.id, row.name)
 
 
-#row = db.session.query(Author).all()
-#print(row)
+row = db.session.query(Author).all()
+print(row)
 
