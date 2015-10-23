@@ -1,7 +1,6 @@
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
-
 from app import db
 
 association_table = db.Table('association', db.Model.metadata,
@@ -22,8 +21,6 @@ class Author(db.Model):
     def __repr__(self):
         return '%r' % (self.name)
 
-
-
 class Book(db.Model):
     __tablename__ = 'book'
     id = db.Column(db.Integer, primary_key=True)
@@ -31,8 +28,6 @@ class Book(db.Model):
                                             unique=True)
     b = relationship("Author", passive_deletes=True, secondary=association_table, backref='posts',\
                            lazy='dynamic')
-
-
     def __init__(self, name):
         self.name = name
 

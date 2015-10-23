@@ -1,44 +1,55 @@
-h1 {background-color: #c5ffa0;
+h1 {
+    background-color: #c5ffa0;
     position: absolute;
     margin: 0;
     padding: 2%;
     margin: 0;
     width: 100%;
-    }
+}
 
-h2 {background-color: white;
+h2 {
+    background-color: white;
     position: absolute;
     top: 15%;
     margin: 0;
-    width: 100%;}
+    width: 100%;
+}
 
-h3 {
-    padding-left: 25px;
-   }
+h3 {padding-left: 25px;}
 
 body {
-    margin: 0;
-    width: 100%;
-     }
+     margin: 0;
+     width: 100%;
+}
 
-#left { position: absolute; left: 0; top: 17%; width: 20%;  }
-#right { position: absolute; right: 0; top: 17%; width: 80%;  }
+#left {
+    position: absolute;
+    left: 0;
+    top: 17%;
+    width: 40%;
+}
+
+#right {
+    position: absolute;
+    right: 0;
+    top: 17%;
+    width: 60%;
+}
+
+.error {color: red;}
 
 em {padding-left: 25px;}
-p {
-   padding-left: 25px;
-   }
-a {padding-left: 25px; }
+
+p {padding-left: 25px;}
+
+a {padding-left: 25px;}
+
 br {line-height: 1.5; }
 
-#booselect
- {
-   display: none;
- }
+#booselect {display: none;}
 
 
-.background_window
-    {
+.background_window {
    position: fixed;
    top: 0;
    right: 0;
@@ -54,14 +65,13 @@ br {line-height: 1.5; }
    -moz-opacity: .15;
    z-index: 101;
    display: none;
-   }
+}
 
-.dialog_window
-    {
+.dialog_window {
    display: none;
    position: fixed;
-   width: 380px;
-   height: 200px;
+   width: 450px;
+   height: 240px;
    top: 50%;
    left: 50%;
    margin-left: -190px;
@@ -73,25 +83,19 @@ br {line-height: 1.5; }
    opacity: 1;
    font-family: Verdana;
    font-size: 10pt;
-   }
+}
 
+.dialog_title {
+   border-bottom: solid 2px #6495ED;
+   background-color: #6495ED;
+   padding: 4px;
+   color: White;
+   font-weight:bold;
+}
 
-
-.dialog_title
-     {
-	border-bottom: solid 2px #6495ED;
-    background-color: #6495ED;
-    padding: 4px;
-    color: White;
-    font-weight:bold;
-    }
-
-.dialog_title a
-{
+.dialog_title a {
    color: White;
    text-decoration: none;
 }
-.right
-{
-   text-align: right;
-}
+
+.right {text-align: right;}

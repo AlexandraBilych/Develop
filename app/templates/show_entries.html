@@ -1,46 +1,71 @@
 {% extends "layout.html" %}
 {% block body %}
   <h3>&nbsp;</h3>
-
   <div id="left">
-      <form action="/search" method="get">
+      <form action="/search" id = 'Search' method="get">
+          <br>
           <p>
-              Search criteria:<br>
-              {{SearchForm.criterion}}
-          <p><br>{{SearchForm.search}}<br>
-          <input id="button1" type="submit" value="Search"></p>
+          <input id="button1" type="submit" value="Search">
+          </p>
+          <p>Search criteria:<br>
+          {{SearchForm.criterion}}
+          <p>
+          <input id="SearchForm.search" name="SearchFrom.search" type="text" list="searchlist" autocomplete="off" required>
+          <datalist id="searchlist">
+          </datalist>
+          <br>
+          {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}</p>
+          {% endif %}
+          </p>
 
       </form>
   </div>
   <div id="right">
       <br>
-      <input type="button" id="Rem" value=" Remove " />
+      <a href='/search?criterion=value_book' class="btnShow" id='ShowAll'> Show all books </a>
+      <p><input type="button" class="popup" id="Rem" value=" Remove "/>
+             <input type="button" class="popup" id="Edit" value="   Edit   " />
+             <input type="button" class="popup" id="Add" value="   Add   " />
+         </p>
 
-       <div id="background" class='background_window'></div>
+          <div id="background" class='background_window'></div>
+
           <div class='dialog_window' id="Window_rem">
-           <form action="/remove" method="get">
-           <a href='/main' id='btnClose'> Close </a>
-           <p> Enter the name:<br>
-              {{RemoveForm.rem_criterion}}
-           <p>
-               <input list="remove_name" id = {{RemoveForm.rem_name}}>
-
-               <datalist id="remove_name">
-                   {% for entry in data %}
-                   <option value=entry>
-                    {% endfor %}
-               </datalist>
-               <input id="button2" type="submit" value="Remove">
-           </p>
-           </form>
+              <form id="RemoveForm" method="get" action="/remove" >
+                  <a href='/main' class="btnClose" id='btnClose1'> Close </a><br>
+                  <p> Enter the name:<br>
+                  {{RemoveForm.rem_criterion}}
+                  <p>
+                  <input id="RemoveForm.rem_name" name="RemoveForm.rem_name" type="text" list="removelist" autocomplete="off" required />
+                  <datalist id="removelist">
+                  </datalist>
+                  </p>
+                  <p><input id="button2" type="submit" value="Remove"></p>
+              </form>
           </div>
 
-      <input type="button" id="Edit" value="   Edit   " />
-      <input type="button" id="Add" value="   Add   " />
+          <div class='dialog_window' id="Window_edit">
+              <form id="EditForm" action="/edit" method="post" >
+                  <a href='/main' class="btnClose" id='btnClose2'> Close </a><br>
+                  <p> Enter the name:<br>
+                  <div class="criteria">
+                  <input type="radio" name="criterion" value="value_book" checked>Book
+                  <input type="radio" name="criterion" value="value_author">Author
+                  </div>
+                  <p><select class="list" name="list" id="list">
+                  </select></p>
+                  <p><input id="edit_name" name="edit_name" type="text"/></p>
+                  <p><input id="button3" type="submit" value="Save">
+                  <input id="Reset" type="reset" value="Reset"><br>
+                  </p>
+              </form>
+          </div>
+
 
 
       <p id="demo"></p>
-      <h3 id="par1">Books:</h3>
+
       <ull class=SearchBook>
            <ol>
            {% for entry in SearchBook %}
@@ -48,14 +73,16 @@
                    {% for a in entry['a_name'] %}
                        <p>{{ a }}</p>
                    {% endfor %}</td></li><br>
+               <input id="button4" type="submit" value="Save">
                </tr>
            {% endfor %}
            </ol>
       </ull>
+
       <ull class=SearchAuthor>
            <ol>
            {% for entry in SearchAuthor %}
-               <tr><li><td><em>"{{entry['a_name']}}"</em><br>
+                <tr><li><td><em>"{{entry['a_name']}}"</em><br>
                    {% for b in entry['b_name'] %}
                        <p>{{ b }}</p>
                    {% endfor %}</td></li><br>
@@ -63,5 +90,10 @@
            {% endfor %}
            </ol>
       </ull>
+
   </div>
+<script>
+    $("#RemoveForm").validate();
+    $("#Search").validate();
+</script>
 {% endblock %}

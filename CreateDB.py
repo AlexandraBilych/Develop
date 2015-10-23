@@ -1,18 +1,8 @@
-import json
-from config import SQLALCHEMY_DATABASE_URI
 from app import db
 from app.module.models import Author, Book
 
 db.drop_all()
 db.create_all()
-
-
-
-
-
-#for row in db.session.query(Book.name.label('books'), Author.name).join(Author)\
-#            .options(joinedload(Author.b)).all():
-#    print(row.Author.name, row.Book.name)
 
 b = Book('The Wheel of Time')
 a1 = Author('Barbara Park')
@@ -51,16 +41,8 @@ b.b.append(a)
 db.session.add(a)
 db.session.commit()
 
-
-#for row in Author.query.join(Book).all():
-#    print(row.name)
-
-
-a = [
-     {'b_name' : book.name,'a_name' : [author for author in book.b ]}
-        for book in db.session.query(Book).all()
-    ]
-
+a = [{'b_name' : book.name,'a_name' : [author for author in book.b ]}
+        for book in db.session.query(Book).all()]
 print(a)
 
 row = db.session.query(Author).all()
@@ -69,17 +51,8 @@ print(row)
 for row in db.session.query(Book).all():
     print(row.id, row.name)
 
-#book = db.session.query(Book).filter(Book.name == 'Lolita').first()
-#print(book)
-#db.session.delete(book)
-#db.session.commit()
-
 for row in db.session.query(Book).all():
     print(row.id, row.name)
-
-#for row in db.session.query(Book).options(joinedload('Book.b')).all():
-#     print(row.id, row.name)
-
 
 row = db.session.query(Author).all()
 print(row)

@@ -1,30 +1,25 @@
-# Import Form and RecaptchaField (optional)
-
 from flask_wtf import Form
-
-# Import Form elements such as TextField and BooleanField (optional)
-from wtforms import TextField, PasswordField, BooleanField,RadioField
-
-# Import Form validators
-from wtforms.validators import Required
+from wtforms import TextField, PasswordField, BooleanField,RadioField, validators
 
 
-# Define the login form (WTForms)
 
 class SearchForm(Form):
-      search = TextField('name', [Required(message='Enter something')])
+      search = TextField('name',validators=
+                             [validators.Required("Please enter name."),
+                              validators.Length(min=20)])
       criterion = RadioField('Label',\
                              choices=[('value_book', 'book'),\
                                       ('value_author', 'autor')],\
               default='value_book')
-
 
 class AddForm(Form):
       new_author = TextField('new_author')
       new_book = TextField('new_book')
 
 class RemoveForm(Form):
-      rem_name = TextField('rem_name',[Required(message='Enter something')])
+      rem_name = TextField('rem_name',validators=
+                             [validators.Required("Please enter name."),
+                              validators.Length(min=20)])
       rem_criterion = RadioField('Label',\
                              choices=[('value_book', 'book'),\
                                       ('value_author', 'autor')],\
@@ -32,7 +27,7 @@ class RemoveForm(Form):
       
 
 class EditForm(Form):
-      rem_name = TextField('rem_name')
+      edit_name = TextField('edit_name')
       ed_criterion = RadioField('Label',\
                              choices=[('value_book', 'book'),\
                                       ('value_author', 'autor')],\
