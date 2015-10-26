@@ -5,10 +5,12 @@ import json
 from app.module.forms import SearchForm, RemoveForm, AddForm, EditForm
 from app.module.models import Author, Book
 
-main = Blueprint('main', __name__, url_prefix='/main')
+main = Blueprint('main', __name__, url_prefix='/')
 search = Blueprint('search', __name__)
 remove = Blueprint('remove', __name__, url_prefix='/remove')
 edit = Blueprint('edit', __name__)
+add_author = Blueprint('add_author', __name__)
+add_book = Blueprint('add_book', __name__)
 
 @main.route('/', methods=['GET','POST'])
 def first(error=None):
@@ -57,22 +59,22 @@ def find():
 def Rem():
     error = None
     checked = request.args.get('rem_criterion', '')
-    print(checked)
     search_request = request.args.get('RemoveForm.rem_name', '')
-    print(search_request)
     if checked == 'value_book' and db.session.query(Book).filter(Book.name == search_request).first():
         book = db.session.query(Book).filter(Book.name == search_request).first()
         db.session.delete(book)
         db.session.commit()
+        flash("Book was successfully removed!")
         return redirect(url_for('main.first'))
     elif checked == 'value_author'and db.session.query(Author).filter(Author.name == search_request).first():
         author = db.session.query(Author).filter(Author.name == search_request).first()
         db.session.delete(author)
         db.session.commit()
+        flash("Author was successfully removed!")
         return redirect(url_for('main.first'))
     else:
-        error = "This book/author isn't in the library!"
-        return redirect(url_for('main.first',error=error))
+        flash("This book/author isn't in the library!")
+        return redirect(url_for('main.first'))
 
 @edit.route('/edit', methods=["POST"])
 def Edit():
@@ -82,22 +84,15 @@ def Edit():
     if request.method == 'POST':
 
         checked = request.form["criterion"]
-        print(checked)
         search_request = request.form["list"]
-        print(search_request)
         new_name = request.form["edit_name"]
-        print(new_name)
         if checked == "value_book":
             book = db.session.query(Book).filter(Book.id == search_request).first()
             if new_name==book.name:
-                print('flash')
-                flash("The name isn't changed")
                 return redirect(url_for('main.first'))
             else:
-                print('edit')
                 book.name = new_name
                 db.session.commit()
-                flash("2The name isn't changed")
                 return redirect(url_for('main.first'))
         elif checked == 'value_author':
             author = db.session.query(Author).filter(Author.id == search_request).first()
@@ -107,6 +102,40 @@ def Edit():
         else:
             error = "This book/author isn't in the library!"
             return redirect(url_for('main.first',error=error))
+
+@add_author.route('/add_author', methods=["POST"])
+def author():
+    author_name = request.form["aadd_name"]
+    book_id = request.form["book_list"]
+    if not db.session.query(Author).filter(Author.name == author_name).first():
+        db.session.add(Author(author_name))
+        db.session.commit()
+        flash(author_name)
+
+    if db.session.query(Book).filter(Book.id == book_id).first():
+        book = db.session.query(Book).filter(Book.id == book_id).first()
+        author = db.session.query(Author).filter(Author.name == author_name).first()
+        author.a.append(book)
+        db.session.commit()
+        flash(book_id)
+    return redirect(url_for('main.first'))
+
+@add_book.route('/add_book', methods=["POST"])
+def book():
+    book_name = request.form["badd_name"]
+    author_id = request.form["author_list"]
+    if not db.session.query(Book).filter(Book.name == book_name).first():
+        db.session.add(Book(book_name))
+        db.session.commit()
+        flash(book_name)
+
+    if db.session.query(Author).filter(Author.id == author_id).first():
+        author = db.session.query(Author).filter(Author.id == author_id).first()
+        book = db.session.query(Book).filter(Book.name == book_name).first()
+        book.b.append(author)
+        db.session.commit()
+        flash(author_id)
+    return redirect(url_for('main.first'))
 
 
 @app.route('/GetBookList', methods=['POST'])

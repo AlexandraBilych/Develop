@@ -180,13 +180,22 @@ function ShowDialog(id){
    $("#background").show();
    if (id == "Rem"){ $("#Window_rem").fadeIn(300);}
    else if (id == "Edit"){ $("#Window_edit").fadeIn(300);}
+   else if (id == "Add_author"){ $("#Window_aadd").fadeIn(300);
+                                 CreateDatalistAuthor();
+                                 }
+   else if (id == "Add_book"){ $("#Window_badd").fadeIn(300);
+                                 CreateDatalistBook();
+                                 CreateHTML2();
+                                 }
    $("#background").unbind("click");
 }
         
 function HideDialog(id){
    $("#background").hide();
-   if (id == "btnClose11"){ $("#Window_rem").fadeOut(300);}
-   else if (id == "btnClose12"){ $("#Window_edit").fadeOut(300);}
+   if (id == "btnClose1"){ $("#Window_rem").fadeOut(300);}
+   else if (id == "btnClose2"){ $("#Window_edit").fadeOut(300);}
+   else if (id == "btnClose4"){ $("#Window_aadd").fadeOut(300);}
+   else if (id == "btnClose6"){ $("#Window_badd").fadeOut(300);}
  }
 
 function CreateHTML1(){
@@ -197,6 +206,7 @@ function CreateHTML1(){
         mas = JSON.parse(books);
             for(var i = 0; i < mas.length; i++){
                 $('#list').append("<option value=\"" + mas[i].id + "\">" + mas[i].name + "</option>");
+                $('#book_list').append("<option value=\"" + mas[i].id + "\">" + mas[i].name + "</option>");
             }
         }
     });
@@ -210,6 +220,7 @@ function CreateHTML2(){
         mas = JSON.parse(authors);
         for(var i = 0; i < mas.length; i++){
             $('#list').append("<option value=\"" + mas[i].id + "\">" + mas[i].name + "</option>");
+            $('#author_list').append("<option value=\"" + mas[i].id + "\">" + mas[i].name + "</option>");
         }
         }
     });
@@ -219,11 +230,14 @@ function CreateDatalistBook(){
     $.ajax({
         type: 'POST',
         url: '/GetBookList',
+        async: false,
         success: function(books){
         mas = JSON.parse(books);
             for(var i = 0; i < mas.length; i++){
                 $('#searchlist').append("<option value=\"" + mas[i].name + "\">");
                 $('#removelist').append("<option value=\"" + mas[i].name + "\">");
+                $('#booklist').append("<option value=\"" + mas[i].name + "\">");
+
             }
         }
     });
@@ -233,11 +247,13 @@ function CreateDatalistAuthor(){
     $.ajax({
         type: 'POST',
         url: '/GetAuthorList',
+        async: false,
         success: function(authors){
         mas = JSON.parse(authors);
         for(var i = 0; i < mas.length; i++){
             $('#searchlist').append("<option value=\"" + mas[i].name + "\">");
             $('#removelist').append("<option value=\"" + mas[i].name + "\">");
+            $('#authorlist').append("<option value=\"" + mas[i].name + "\">");
         }
         }
     });
