@@ -57,8 +57,8 @@
                   <datalist id="removelist">
                   </datalist>
                   </p>
-                  <p><input id="button2" type="submit" value="Remove">
-                     <input id="btnClose1" class="btnClose" type="button" value="Close">
+                  <p><input id="button2" type="submit" value="  Remove" >
+                     <input id="btnClose1" class="btnClose" type="button" value="    Close    ">
                   </p>
               </form>
           </div>
@@ -66,17 +66,18 @@
 
           <div class='dialog_window' id="Window_edit">
               <form id="EditForm" action="/edit" method="post" >
-                  <a href='/' class="btnClose" id='btnClose2'> Close </a><br>
-                  <p> Enter the name:<br>
+
+                  <p> Edit by:<br>
                   <div class="criteria">
-                  <input type="radio" name="criterion" value="value_book" checked>Book
-                  <input type="radio" name="criterion" value="value_author">Author
+                  <p><input type="radio" name="criterion" value="value_book" checked>Book
+                  <input type="radio" name="criterion" value="value_author">Author</p>
                   </div>
                   <p><select class="list" name="list" id="list">
                   </select></p>
-                  <p><input id="edit_name" name="edit_name" type="text"/></p>
-                  <p><input id="button3" type="submit" value="Save">
-                  <input id="Reset" type="reset" value="Reset"><br>
+                  <p><input id="edit_name" name="edit_name" type="text"/><br>
+                  <p><input id="button3" type="submit" value="      Save      ">
+                  <input id="Reset" type="reset" value="     Reset     ">
+                  <input id="btnClose2" class="btnClose" type="button" value="     Close     ">
                   </p>
               </form>
           </div>
@@ -84,32 +85,33 @@
 
           <div class='dialog_window' id="Window_aadd">
               <form id="AAddForm" action="/add_author" method="post" >
-                  <a href='/' class="btnClose" id='btnClose4'> Close </a><br>
-                  <p> Enter a new or existing name of the author:<br>
-                  <input id="aadd_name" name="aadd_name" type="text" list="authorlist" autocomplete="off" required/></p>
+                  <p> Enter a new or existing name of the author:</p>
+                  <p><input id="aadd_name" name="aadd_name" type="text" list="authorlist" autocomplete="off" required/></p>
                   <datalist id="authorlist">
                   </datalist>
-                  <p>You can add an existing book for the author:<br>
-                  <select class="list" name="book_list" id="book_list">
+                  <p>You can add an existing book for the author:</p>
+                  <p><select class="list" name="book_list" id="book_list">
                       <option value="0">&nbsp;</option>
                   </select></p>
-                  <p><input id="button5" type="submit" value="Save"><br>
+                  <p><input id="button5" type="submit" value="     Save     " style="margin-right: 15px;">
+                      <input id="btnClose4" class="btnClose" type="button" value="     Close     " >
                   </p>
               </form>
           </div>
 
           <div class='dialog_window' id="Window_badd">
               <form id="BAddForm" action="/add_book" method="post" >
-                  <a href='/' class="btnClose" id='btnClose6'> Close </a><br>
-                  <p> Enter a new or existing label of the book:<br>
-                  <input id="badd_name" name="badd_name" type="text" list="booklist" autocomplete="off" required/></p>
+                  <p> Enter a new or existing label of the book:</p>
+                  <p><input id="badd_name" name="badd_name" type="text" list="booklist" autocomplete="off" required/></p>
                   <datalist id="booklist">
                   </datalist>
-                  <p>You can add an existing author for the book:<br>
-                  <select class="list" name="author_list" id="author_list">
+                  <p>You can add an existing author for the book:</p>
+                  <p><select class="list" name="author_list" id="author_list">
                       <option value="0">&nbsp;</option>
                   </select></p>
-                  <p><input id="button7" type="submit" value="Save"><br>
+                  <p><input id="button7" type="submit" value="     Save     " style="margin-right: 15px;">
+                      <input id="btnClose6" class="btnClose" type="button" value="     Close     ">
+                      <br>
                   </p>
               </form>
           </div>
