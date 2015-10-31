@@ -41,19 +41,3 @@ b.b.append(a)
 db.session.add(a)
 db.session.commit()
 
-a = [{'b_name' : book.name,'a_name' : [author for author in book.b ]}
-        for book in db.session.query(Book).all()]
-print(a)
-
-row = db.session.query(Author).all()
-print(row)
-
-for row in db.session.query(Book).all():
-    print(row.id, row.name)
-
-for row in db.session.query(Book).all():
-    print(row.id, row.name)
-
-row = db.session.query(Author).all()
-print(row)
-

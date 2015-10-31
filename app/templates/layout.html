@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
@@ -10,11 +11,13 @@
     </script>
     <script type="text/javascript" src="/static/jquery.validate.min.js">
     </script>
+
 </head>
+
 <body>
-  <a href="http://0.0.0.0:5000/">
-      <h1>Electronic Resources</h1>
-  </a>
-  {% block body %}{% endblock %}
+    <a href="http://0.0.0.0:5000/">
+        <h1>Electronic Resources</h1>
+    </a>
+    {% block body %}{% endblock %}
 </body>
 </html>

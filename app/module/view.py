@@ -24,10 +24,8 @@ def find():
         error = None
         checked = request.args.get('criterion', '')
         search_request =request.args.get('SearchFrom.search', '')
-        if checked == 'value_book'\
-                and \
-                db.session.query(Book).\
-                        filter(Book.name.contains(search_request)).all():
+        if checked == 'value_book' and \
+        db.session.query(Book).filter(Book.name.contains(search_request)).all():
             list = [
                 {'b_name': book.name, 'a_name': [author.name for author in book.b]}
                 for book in db.session.query(Book).\
@@ -36,11 +34,10 @@ def find():
             return render_template('show_entries.html',\
                                a=request.args.get('search', ''),\
                                SearchBook=list,SearchForm=SearchForm(criterion='value_book'),\
-                                   RemoveForm=RemoveForm(),error=error)
-        elif checked == 'value_author'\
-                and\
-                db.session.query(Author).\
-                filter(Author.name.contains(search_request)).all():
+                               RemoveForm=RemoveForm(),error=error)
+
+        elif checked == 'value_author' and \
+        db.session.query(Author).filter(Author.name.contains(search_request)).all():
             list = [
                 {'a_name': author.name, 'b_name': [book.name for book in author.a]}
                 for author in db.session.query(Author).\
@@ -50,7 +47,7 @@ def find():
                                a=request.args.get('search', ''),\
                                SearchAuthor=list,\
                                SearchForm=SearchForm(criterion='value_author'),\
-                                   RemoveForm=RemoveForm(),error=error)
+                               RemoveForm=RemoveForm(),error=error)
         else:
             error = 'Search by \"'+search_request+'\" didn\'t return any results'
             return redirect(url_for('main.first',error=error))
@@ -141,7 +138,6 @@ def book():
 @app.route('/GetBookList', methods=['POST'])
 def GetBookList():
     books = db.session.query(Book).all()
-
     return json.dumps([
         {'id': book.id, 'name': book.name}
         for book in books
@@ -150,7 +146,6 @@ def GetBookList():
 @app.route('/GetAuthorList', methods=['POST'])
 def GetAuthorList():
     authors = db.session.query(Author).all()
-
     return json.dumps([
         {'id': author.id, 'name': author.name}
         for author in authors
