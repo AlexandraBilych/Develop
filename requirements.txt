@@ -1,8 +1,1 @@
 Flask==0.10.1
-flask.ext.sqlalchemy==2.0
-json==2.0.9
-sqlalchemy==1.0.8
-flask_wtf==0.12
-wtforms==2.0.2
-Jinja2==2.8
-Werkzeug==0.10
