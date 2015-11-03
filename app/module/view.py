@@ -7,7 +7,7 @@ from app.module.models import Author, Book
 
 main = Blueprint('main', __name__, url_prefix='/')
 search = Blueprint('search', __name__)
-remove = Blueprint('remove', __name__, url_prefix='/remove')
+remove = Blueprint('remove', __name__)
 edit = Blueprint('edit', __name__)
 add_author = Blueprint('add_author', __name__)
 add_book = Blueprint('add_book', __name__)
@@ -52,7 +52,7 @@ def find():
             error = 'Search by \"'+search_request+'\" didn\'t return any results'
             return redirect(url_for('main.first',error=error))
 
-@remove.route('/', methods=['GET'])
+@remove.route('/remove', methods=['GET'])
 def Rem():
     error = None
     checked = request.args.get('rem_criterion', '')
@@ -61,16 +61,16 @@ def Rem():
         book = db.session.query(Book).filter(Book.name == search_request).first()
         db.session.delete(book)
         db.session.commit()
-        flash("Book was successfully removed!")
+        flash("'" + search_request + "' was successfully removed!")
         return redirect(url_for('main.first'))
     elif checked == 'value_author'and db.session.query(Author).filter(Author.name == search_request).first():
         author = db.session.query(Author).filter(Author.name == search_request).first()
         db.session.delete(author)
         db.session.commit()
-        flash("Author was successfully removed!")
+        flash("'" + search_request + "' was successfully removed!")
         return redirect(url_for('main.first'))
     else:
-        flash("This book/author isn't in the library!")
+        flash("Error: '" + search_request + "' isn't in the library!")
         return redirect(url_for('main.first'))
 
 @edit.route('/edit', methods=["POST"])
@@ -107,14 +107,13 @@ def author():
     if not db.session.query(Author).filter(Author.name == author_name).first():
         db.session.add(Author(author_name))
         db.session.commit()
-        flash(author_name)
-
+        flash('New author: "' + author_name + '" was added in the library!')
     if db.session.query(Book).filter(Book.id == book_id).first():
         book = db.session.query(Book).filter(Book.id == book_id).first()
         author = db.session.query(Author).filter(Author.name == author_name).first()
         author.a.append(book)
         db.session.commit()
-        flash(book_id)
+        flash('Book "' + book.name + '" was added to author "' + author_name +'"!')
     return redirect(url_for('main.first'))
 
 @add_book.route('/add_book', methods=["POST"])
@@ -124,16 +123,14 @@ def book():
     if not db.session.query(Book).filter(Book.name == book_name).first():
         db.session.add(Book(book_name))
         db.session.commit()
-        flash(book_name)
-
+        flash('New book: "' + book_name + '" was added in the library!')
     if db.session.query(Author).filter(Author.id == author_id).first():
         author = db.session.query(Author).filter(Author.id == author_id).first()
         book = db.session.query(Book).filter(Book.name == book_name).first()
         book.b.append(author)
         db.session.commit()
-        flash(author_id)
+        flash('Author "' + author.name + '" was added to book "' + book_name + '"!')
     return redirect(url_for('main.first'))
-
 
 @app.route('/GetBookList', methods=['POST'])
 def GetBookList():

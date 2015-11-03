@@ -2,7 +2,7 @@
 {% block body %}
   <h3>&nbsp;</h3>
 
-  <div id="left">
+  <div id="left"><p>
       <form action="/search" id = 'Search' method="get"><br>
           <p>
               <input id="button1" type="submit" value="Search">
@@ -20,7 +20,7 @@
       </form>
   </div>
 
-  <div id="right">
+  <div id="right"><br>
        {% with messages = get_flashed_messages() %}
            {% if messages %}
                <div class="flashes">
@@ -29,7 +29,7 @@
                    {% endfor %}
                </div>
            {% endif %}
-       {% endwith %}<br>
+       {% endwith %}
 
       <a href='/search?criterion=value_book' class="btnShow" id='ShowAll'> Show all books </a>
       <p>

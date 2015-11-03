@@ -206,7 +206,7 @@ function HideDialog(id){
 
 
 function CreateHTML(array, id){
-    $('#' + id).children().remove();
+    $('#' + id + ' option:gt(0)').remove().end();
     for(var i = 0; i < array.length; i++){
         $('#' + id).append("<option value=\"" + array[i].id + "\">" + array[i].name + "</option>");
     }
