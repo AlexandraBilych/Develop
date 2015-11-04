@@ -1,2 +1,2 @@
 Flask==0.10.1
-flask.ext.sqlalchemy==2.0
+Flask-SQLAlchemy==1.0
