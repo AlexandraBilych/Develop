@@ -24,6 +24,7 @@ $(document).ready(function(){
     for(var i = 0; i < book_array.length; i++){
         $('#searchlist').append("<option value=\"" + book_array[i].name + "\">");
         $('#removelist').append("<option value=\"" + book_array[i].name + "\">");
+        $('#list').append("<option value=\"" + book_array[i].id + "\">" + book_array[i].name + "</option>");
     }
 
 /* Validation input fields START */
@@ -116,7 +117,7 @@ $(document).ready(function(){
            CreateHTML(author_array, 'author_list');
        }
        else if (id == "Edit"){
-           CreateHTML(book_array, 'list');
+           /*CreateHTML(book_array, 'list');*/
        }
     });
 
@@ -131,6 +132,8 @@ $(document).ready(function(){
     $("#Reset").click(function (){
         $("#EditForm").validate().resetForm();
         $('input[id="edit_name"]').attr('value','');
+        $("#list").children().remove();
+        CreateHTML(book_array, 'list');
     });
 
 

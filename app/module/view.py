@@ -90,11 +90,13 @@ def Edit():
             else:
                 book.name = new_name
                 db.session.commit()
+                flash("Book was succesfully renamed!")
                 return redirect(url_for('main.first'))
         elif checked == 'value_author':
             author = db.session.query(Author).filter(Author.id == search_request).first()
             author.name = new_name
             db.session.commit()
+            flash("Author was succesfully renamed!")
             return redirect(url_for('main.first'))
         else:
             error = "This book/author isn't in the library!"
