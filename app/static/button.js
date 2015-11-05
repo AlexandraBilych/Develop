@@ -143,6 +143,7 @@ $(document).ready(function(){
 
     $(".criteria input[type=radio]").change(function(){
         $('input[id="edit_name"]').attr('value','');
+        $("#list").children().remove();
         if($(".criteria input[type=radio]:checked").val() == "value_author"){
             CreateHTML(author_array, 'list');
         }
