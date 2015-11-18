@@ -4,6 +4,7 @@ from app import db,app
 import json
 from app.module.forms import SearchForm, RemoveForm, AddForm, EditForm
 from app.module.models import Author, Book
+from sqlalchemy import func
 
 main = Blueprint('main', __name__, url_prefix='/')
 search = Blueprint('search', __name__)
@@ -25,11 +26,11 @@ def find():
         checked = request.args.get('criterion', '')
         search_request =request.args.get('SearchFrom.search', '')
         if checked == 'value_book' and \
-        db.session.query(Book).filter(Book.name.contains(search_request)).all():
+        db.session.query(Book).filter(func.lower(Book.name).contains(func.lower(search_request))).all():
             list = [
                 {'b_name': book.name, 'a_name': [author.name for author in book.b]}
                 for book in db.session.query(Book).\
-                    filter(Book.name.contains(search_request)).all()
+                    filter(func.lower(Book.name).contains(func.lower(search_request))).all()
                 ]
             return render_template('show_entries.html',\
                                a=request.args.get('search', ''),\
@@ -37,11 +38,11 @@ def find():
                                RemoveForm=RemoveForm(),error=error)
 
         elif checked == 'value_author' and \
-        db.session.query(Author).filter(Author.name.contains(search_request)).all():
+        db.session.query(Author).filter(func.lower(Author.name).contains(func.lower(search_request))).all():
             list = [
                 {'a_name': author.name, 'b_name': [book.name for book in author.a]}
                 for author in db.session.query(Author).\
-                    filter(Author.name.contains(search_request)).all()
+                    filter(func.lower(Author.name).contains(func.lower(search_request))).all()
                 ]
             return render_template('show_entries.html',\
                                a=request.args.get('search', ''),\
@@ -105,18 +106,29 @@ def Edit():
 @add_author.route('/add_author', methods=["POST"])
 def author():
     author_name = request.form["aadd_name"]
-    book_id = request.form["book_list"]
+    book_name = request.form["book_list"]
+
     if not db.session.query(Author).filter(Author.name == author_name).first():
         db.session.add(Author(author_name))
-        db.session.commit()
         flash('New author: "' + author_name + '" was added in the library!')
-    if db.session.query(Book).filter(Book.id == book_id).first():
-        book = db.session.query(Book).filter(Book.id == book_id).first()
+
+    if book_name is "":
         author = db.session.query(Author).filter(Author.name == author_name).first()
-        author.a.append(book)
-        db.session.commit()
-        flash('Book "' + book.name + '" was added to author "' + author_name +'"!')
+        author.a = []
+        flash('Deleted books for author: "' + author_name + '"!')
+    else:
+        if not db.session.query(Book).filter(Book.name == book_name).first():
+            db.session.add(Book(book_name))
+            flash('New book: "' + book_name + '" was added in the library!')
+        else:
+            book = db.session.query(Book).filter(Book.name == book_name).first()
+            author = db.session.query(Author).filter(Author.name == author_name).first()
+            author.a.append(book)
+            flash('Book "' + book.name + '" was added to author "' + author_name +'"!')
+
+    db.session.commit()
     return redirect(url_for('main.first'))
+
 
 @add_book.route('/add_book', methods=["POST"])
 def book():
