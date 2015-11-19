@@ -77,8 +77,6 @@ def Rem():
 @edit.route('/edit', methods=["POST"])
 def Edit():
     error = None
-    print("Yes")
-    print(request.method)
     if request.method == 'POST':
 
         checked = request.form["criterion"]
@@ -112,19 +110,20 @@ def author():
         db.session.add(Author(author_name))
         flash('New author: "' + author_name + '" was added in the library!')
 
+    author = db.session.query(Author).filter(Author.name == author_name).first()
+
     if book_name is "":
-        author = db.session.query(Author).filter(Author.name == author_name).first()
-        author.a = []
-        flash('Deleted books for author: "' + author_name + '"!')
+        if [d for d in author.a] != []:
+            author.a = []
+            flash('Deleted books for author: "' + author_name + '"!')
     else:
         if not db.session.query(Book).filter(Book.name == book_name).first():
             db.session.add(Book(book_name))
             flash('New book: "' + book_name + '" was added in the library!')
-        else:
-            book = db.session.query(Book).filter(Book.name == book_name).first()
-            author = db.session.query(Author).filter(Author.name == author_name).first()
-            author.a.append(book)
-            flash('Book "' + book.name + '" was added to author "' + author_name +'"!')
+
+        book = db.session.query(Book).filter(Book.name == book_name).first()
+        author.a.append(book)
+        flash('Book "' + book.name + '" was added to author "' + author_name +'"!')
 
     db.session.commit()
     return redirect(url_for('main.first'))
@@ -133,18 +132,30 @@ def author():
 @add_book.route('/add_book', methods=["POST"])
 def book():
     book_name = request.form["badd_name"]
-    author_id = request.form["author_list"]
+    author_name = request.form["author_list"]
+
     if not db.session.query(Book).filter(Book.name == book_name).first():
         db.session.add(Book(book_name))
-        db.session.commit()
         flash('New book: "' + book_name + '" was added in the library!')
-    if db.session.query(Author).filter(Author.id == author_id).first():
-        author = db.session.query(Author).filter(Author.id == author_id).first()
-        book = db.session.query(Book).filter(Book.name == book_name).first()
+
+    book = db.session.query(Book).filter(Book.name == book_name).first()
+
+    if author_name is "":
+        if [d for d in book.b] != []:
+            book.b = []
+            flash('Deleted authors for book: "' + book_name + '"!')
+    else:
+        if not db.session.query(Author).filter(Author.name == author_name).first():
+            db.session.add(Author(author_name))
+            flash('New author: "' + author_name + '" was added in the library!')
+
+        author = db.session.query(Author).filter(Author.name == author_name).first()
         book.b.append(author)
-        db.session.commit()
-        flash('Author "' + author.name + '" was added to book "' + book_name + '"!')
+        flash('Author "' + author.name + '" was added to book "' + book_name +'"!')
+
+    db.session.commit()
     return redirect(url_for('main.first'))
+
 
 @app.route('/GetBookList', methods=['POST'])
 def GetBookList():

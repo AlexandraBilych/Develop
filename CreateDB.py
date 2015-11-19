@@ -40,4 +40,3 @@ db.session.add(b)
 b.b.append(a)
 db.session.add(a)
 db.session.commit()
-

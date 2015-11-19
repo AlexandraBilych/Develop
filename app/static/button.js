@@ -110,11 +110,11 @@ $(document).ready(function(){
         ShowDialog(id);
        if (id == "Add_author"){
            CreateDatalist(author_array, 'authorlist');
-           CreateHTML(book_array, 'book_list');
+           CreateDatalist(book_array, 'books');
        }
        else if (id == "Add_book"){
            CreateDatalist(book_array, 'booklist');
-           CreateHTML(author_array, 'author_list');
+           CreateDatalist(author_array, 'authors');
        }
        else if (id == "Edit"){
            /*CreateHTML(book_array, 'list');*/

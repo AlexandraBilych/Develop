@@ -88,9 +88,9 @@
               </datalist>
               <p>You can add an existing book for the author:</p>
               <p>
-                  <select class="list" name="book_list" id="book_list">
-                      <option value="0">&nbsp;</option>
-                  </select>
+                <input id="book_list" name="book_list" type="text" list="books" autocomplete="off" />
+                <datalist id="books">
+                </datalist>
               </p>
               <p>
                   <input id="button5" type="submit" value="     Save     " style="margin-right: 15px;">
@@ -107,9 +107,9 @@
               </datalist>
               <p>You can add an existing author for the book:</p>
               <p>
-                  <select class="list" name="author_list" id="author_list">
-                      <option value="0">&nbsp;</option>
-                  </select>
+                  <input id="author_list" name="author_list" type="text" list="authors" autocomplete="off" />
+                  <datalist id="authors">
+                  </datalist>
               </p>
               <p>
                   <input id="button7" type="submit" value="     Save     " style="margin-right: 15px;">
