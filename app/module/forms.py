@@ -1,34 +1,18 @@
-from flask_wtf import Form
-from wtforms import TextField, PasswordField, BooleanField,RadioField, validators
-
+from flask.ext.wtf import Form
+from wtforms.fields import TextField, RadioField
+from wtforms.validators import Required
 
 
 class SearchForm(Form):
-      search = TextField('name',validators=
-                             [validators.Required("Please enter name."),
-                              validators.Length(min=20)])
+      search = TextField('search', validators = [Required()])
       criterion = RadioField('Label',\
                              choices=[('value_book', 'book'),\
                                       ('value_author', 'autor')],\
               default='value_book')
 
-class AddForm(Form):
-      new_author = TextField('new_author')
-      new_book = TextField('new_book')
-
 class RemoveForm(Form):
-      rem_name = TextField('rem_name',validators=
-                             [validators.Required("Please enter name."),
-                              validators.Length(min=20)])
+      rem_name = TextField('rem_name', validators = [Required()])
       rem_criterion = RadioField('Label',\
-                             choices=[('value_book', 'book'),\
-                                      ('value_author', 'autor')],\
-              default='value_book')
-      
-
-class EditForm(Form):
-      edit_name = TextField('edit_name')
-      ed_criterion = RadioField('Label',\
                              choices=[('value_book', 'book'),\
                                       ('value_author', 'autor')],\
               default='value_book')

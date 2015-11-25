@@ -19,92 +19,14 @@ $(document).ready(function(){
         book_array = JSON.parse(books);
         }
       });
-
-/* fills values to search for */
-    for(var i = 0; i < book_array.length; i++){
-        $('#searchlist').append("<option value=\"" + book_array[i].name + "\">");
-        $('#removelist').append("<option value=\"" + book_array[i].name + "\">");
-        $('#list').append("<option value=\"" + book_array[i].id + "\">" + book_array[i].name + "</option>");
-    }
-
-/* Validation input fields START */
-      jQuery.validator.setDefaults({
+	  
+	  
+	jQuery.validator.setDefaults({
         debug: true,
         success: "valid"
       });
-
-
-      jQuery.validator.addMethod("thesame", function(value, element) {
-	   return this.optional(element) || value != $('#list option:selected').text();
-      }, "The name doesn't change!")
-
-
-      jQuery.validator.addMethod("exist", function(value, element) {
-      if($(".criteria input[type=radio]:checked").val() == "value_book"){
-        ex = true;
-        for(var i = 0; i < book_array.length; i++){
-            if ($('input[id="edit_name"]').val()==book_array[i].name){
-                ex = false;
-            }
-       }
-      }
-      else{
-          ex = true;
-          for(var i = 0; i < author_array.length; i++){
-              if ($('input[id="edit_name"]').val()==author_array[i].name){
-                  ex = false;
-              }
-          }
-       }
-      return ex;
-
-      }, "This name has already existed!");
-
-
-      jQuery.validator.addMethod("present", function(value, element) {
-      alert($("#rem_criterion input[type=radio]:checked").val());
-      if($("#rem_criterion input[type=radio]:checked").val() == "value_book"){
-        ex = false;
-        for(var i = 0; i < book_array.length; i++){
-            if ($('input[id="RemoveForm.rem_name"]').val()==book_array[i].name){
-                ex = true;
-            }
-       }
-      }
-      else{
-          ex = false;
-          for(var i = 0; i < author_array.length; i++){
-              if ($('input[id="RemoveForm.rem_name"]').val()==author_array[i].name){
-                  ex = true;
-              }
-          }
-      }
-      return ex;
-
-      }, "This book/author isn't in the library!");
-/* Validation input fields END */
-
-
-    $("#criterion").change(function (){
-        if($("#criterion input[type=radio]:checked").val() == "value_author"){
-            CreateDatalist(author_array, 'searchlist' );
-        }
-        else {
-            CreateDatalist(book_array, 'searchlist');
-        }
-    });
-
-
-    $("#rem_criterion").change(function (){
-        if($("#rem_criterion input[type=radio]:checked").val() == "value_author"){
-            CreateDatalist(author_array, 'removelist');
-        }
-        else {
-            CreateDatalist(book_array, 'removelist');
-        }
-    });
-
-
+	  
+/* Presetting forms */	  
     $(".popup").click(function (){
         var id = this.id
         ShowDialog(id);
@@ -117,8 +39,22 @@ $(document).ready(function(){
            CreateDatalist(author_array, 'authors');
        }
        else if (id == "Edit"){
-           /*CreateHTML(book_array, 'list');*/
-       }
+           CreateHTML(book_array, 'list');
+		   $('input[id="edit_name"]').attr('value', $('#list option:selected').text());
+		   $('#Alist').empty();		
+		   $.ajax({
+                type: 'POST',
+                data: JSON.stringify({edit_name: $('#list option:selected').text()}),
+                url: '/GetAutorsforBook',
+                async: false,
+                success: function(data){
+                authors = JSON.parse(data);
+                }
+           });
+           for(var i = 0; i < authors[0].name.length; i++){
+           $('#Alist').append("<input name=\"first\" type=\"checkbox\" value=\"" + authors[0].name[i] + "\" checked>" + authors[0].name[i] + "<br>");
+           }
+           }
     });
 
 
@@ -126,52 +62,224 @@ $(document).ready(function(){
       {
          var id = this.id
          HideDialog(id);
-      });
+    });
+	  
+	
+/* fills values to search for */
+    for(var i = 0; i < book_array.length; i++){
+        $('#searchlist').append("<option value=\"" + book_array[i].name + "\">");
+        $('#removelist').append("<option value=\"" + book_array[i].name + "\">");
+      /*  $('#list').append("<option value=\"" + book_array[i].id + "\">" + book_array[i].name + "</option>");*/
+    }	
+	  
+/* SEARCH */
+/* Add attribute "list" for input field Searchform */
 
+    var s = document.getElementById("search");
+    var att1 = document.createAttribute("list");
+    att1.value = "searchlist";
+    s.setAttributeNode(att1);
+    s.required = true;
+	
+	
+    $("#criterion").change(function (){
+        if($("#criterion input[type=radio]:checked").val() == "value_author"){
+            CreateDatalist(author_array, 'searchlist' );
+        }
+        else {
+            CreateDatalist(book_array, 'searchlist');
+        }
+    });
+	
+	
 
+/* REMOVE */
+/* Add attribute "list" for input field Searchform */
+
+    var r = document.getElementById("rem_name");
+    var att2 = document.createAttribute("list");
+    att2.value = "removelist";
+    r.setAttributeNode(att2);
+    r.required = true;
+	
+	
+/* Validation input fields */
+    jQuery.validator.addMethod("present", function(value, element) {
+      alert($("#rem_criterion input[type=radio]:checked").val());
+      if($("#rem_criterion input[type=radio]:checked").val() == "value_book"){
+        ex = false;
+        for(var i = 0; i < book_array.length; i++){
+            if ($('input[id="rem_name"]').val()==book_array[i].name){
+                ex = true;
+            }
+       }
+      }
+      else{
+          ex = false;
+          for(var i = 0; i < author_array.length; i++){
+              if ($('input[id="rem_name"]').val()==author_array[i].name){
+                  ex = true;
+              }
+          }
+      }
+      return ex;
+
+      }, "This book/author isn't in the library!");
+
+	
+    $("#rem_criterion").change(function (){
+        if($("#rem_criterion input[type=radio]:checked").val() == "value_author"){
+            CreateDatalist(author_array, 'removelist');
+        }
+        else {
+            CreateDatalist(book_array, 'removelist');
+        }
+    });
+	
+	
+/* Validation with custom method
+  $('#RemoveForm').validate({
+    rules: {
+      rem_name: {
+         present: true
+      }
+    },
+    submitHandler: function(form) {
+        form.submit();
+    }
+    }); */
+	
+	
+/* EDIT */
+/* Validation input fields */
+    jQuery.validator.addMethod("thesame", function(value, element) {
+        return this.optional(element) || value != $('#list option:selected').text();
+        }, "The name doesn't change!")
+		
+		
+	jQuery.validator.addMethod("exist", function(value, element) {
+      if($(".criteria input[type=radio]:checked").val() == "value_book"){
+        ex = true;
+        for(var i = 0; i < book_array.length; i++){
+            if (book_array[i].name != $('#list option:selected').text()){
+                if ($('input[id="edit_name"]').val()==book_array[i].name){
+                    ex = false;
+                }
+            }
+       }
+      }
+      else{
+          ex = true;
+          for(var i = 0; i < author_array.length; i++){
+              if (author_array[i].name != $('#list option:selected').text()){
+              if ($('input[id="edit_name"]').val()==author_array[i].name){
+                  ex = false;
+              }
+              }
+
+          }
+       }
+      return ex;
+
+      }, "This name has already existed!");
+
+	
     $("#Reset").click(function (){
         $("#EditForm").validate().resetForm();
-        $('input[id="edit_name"]').attr('value','');
-        $("#list").children().remove();
-        CreateHTML(book_array, 'list');
-    });
-
-
-    $('#list').change(function(){
-        var text = $('#list option:selected').text();
-        $('input[id="edit_name"]').attr('value',text);
-        $('input[id="edit_name"]').css("width", $('#list').css('width'));
-    });
-
-
+		$("#list").children().remove();
+		CreateHTML(book_array, 'list');
+        $('input[id="edit_name"]').attr('value', $('#list option:selected').text());
+        $('#Alist').empty();		
+		$.ajax({
+                type: 'POST',
+                data: JSON.stringify({edit_name: $('#list option:selected').text()}),
+                url: '/GetAutorsforBook',
+                async: false,
+                success: function(data){
+                authors = JSON.parse(data);
+                }
+        });
+        for(var i = 0; i < authors[0].name.length; i++){
+            $('#Alist').append("<input name=\"first\" type=\"checkbox\" value=\"" + authors[0].name[i] + "\" checked>" + authors[0].name[i] + "<br>");
+        }
+    });	
+	  
+	  
     $(".criteria input[type=radio]").change(function(){
         $('input[id="edit_name"]').attr('value','');
         $("#list").children().remove();
+		$('#Alist').empty();
         if($(".criteria input[type=radio]:checked").val() == "value_author"){
             CreateHTML(author_array, 'list');
         }
         else {
+
             CreateHTML(book_array, 'list');
+
         }
-     });
+    });
+	 
+	
+    $('#list').click(function(){
+        var text = $('#list option:selected').text();
+        $('input[id="edit_name"]').attr('value',text);
+        $('input[id="edit_name"]').css("width", $('#list').css('width'));
+		$('#Alist').empty();
+		if (($(".criteria input[type=radio]:checked").val() == "value_book")){
+		    $.ajax({
+                type: 'POST',
+                data: JSON.stringify({edit_name: text}),
+                url: '/GetAutorsforBook',
+                async: false,
+                success: function(data){
+                authors = JSON.parse(data);
+                }
+            });
+            for(var i = 0; i < authors[0].name.length; i++){
+                $('#Alist').append("<input name=\"first\" type=\"checkbox\" value=\"" + authors[0].name[i] + "\" checked>" + authors[0].name[i] + "<br>");
+            }
+		    }
+		else{
+		    $.ajax({
+                type: 'POST',
+                data: JSON.stringify({edit_name: text}),
+                url: '/GetBooksforAuthor',
+                async: false,
+                success: function(data){
+                books = JSON.parse(data);
+                }
+            });
+            for(var i = 0; i < books[0].name.length; i++){
+                $('#Alist').append("<input name=\"first\" type=\"checkbox\" value=\"" + books[0].name[i] + "\" checked>" + books[0].name[i] + "<br>");
+            }
+		}
 
 
+    });
+
+	
     $('#EditForm').validate({
     rules: {
       edit_name: {
          required: true,
-         thesame: true,
          exist: true
       }
     },
     submitHandler: function(form) {
         form.submit();
     }
-});
+    });
+
+
+	  
+/* AADD */
+
+
+
+/* BADD */ 
 
 
 });
-
 
 
 function ShowDialog(id){
@@ -215,7 +323,7 @@ function CreateHTML(array, id){
         $('#' + id).append("<option value=\"" + array[i].id + "\">" + array[i].name + "</option>");
     }
 }
-
+ $('#list').append("<option value=\"" + book_array[i].id + "\">" + book_array[i].name + "</option>");
 
 function CreateDatalist(array, id){
     $('#' + id).children().remove();

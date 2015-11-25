@@ -74,7 +74,8 @@ br {line-height: 1.5; }
    display: none;
    position: fixed;
    width: 450px;
-   height: 210px;
+   height: 250px;
+   overflow: auto;
    top: 50%;
    left: 50%;
    margin-left: -190px;

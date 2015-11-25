@@ -3,15 +3,16 @@
   <h3>&nbsp;</h3>
 
   <div id="left"><p>
-      <form action="/search" id = 'Search' method="get"><br>
+      <form action="/search" method="post" id = 'Search' autocomplete="off"><br>
+          {{SearchForm.hidden_tag()}}
           <p>
-              <input id="button1" type="submit" value="Search">
+              <input id="button1" type="submit" value="Search" >
           </p>
           <p>Search criteria:<br>
               {{SearchForm.criterion}}
           </p>
-          <p>
-              <input id="SearchForm.search" name="SearchFrom.search" type="text" list="searchlist" autocomplete="off" required>
+              <p id=SearchForm.search> {{SearchForm.search}}
+              </p>
               <datalist id="searchlist">
               </datalist><br>
               {% if error %}
@@ -31,23 +32,24 @@
            {% endif %}
        {% endwith %}
 
-      <a href='/search?criterion=value_book' class="btnShow" id='ShowAll'> Show all books </a>
       <p>
           <input type="button" class="popup" id="Rem" value=" Remove "/>
           <input type="button" class="popup" id="Edit" value="   Edit   " />
           <input type="button" class="popup" id="Add_author" value="  Add author  " />
-          <input type="button" class="popup" id="Add_book" value="  Add book  " />
+          <input type="button" class="popup" id="Add_book" value="  Add book  "  />
       </p>
 
       <div id="background" class='background_window'></div>
 
       <div class='dialog_window' id="Window_rem">
-          <form id="RemoveForm" method="get" action="/remove" >
+          <form id="RemoveForm" method="post" action="/remove" autocomplete="off">
+              {{SearchForm.hidden_tag()}}
               <p>Remove by:</p>
               {{RemoveForm.rem_criterion}}
               <p>Please, enter the name:</p>
               <p>
-                  <input id="RemoveForm.rem_name" name="RemoveForm.rem_name" type="text" list="removelist" autocomplete="off" required />
+                  <p id=RemoveForm.rem_name> {{RemoveForm.rem_name}}
+                  </p>
                   <datalist id="removelist">
                   </datalist>
               </p>
@@ -60,6 +62,11 @@
 
       <div class='dialog_window' id="Window_edit">
            <form id="EditForm" action="/edit" method="post" >
+               <p>
+                   <input id="button3" type="submit" value="      Save      ">
+                   <input id="Reset" type="reset" value="     Reset     ">
+                   <input id="btnClose2" class="btnClose" type="button" value="     Close     ">
+               </p>
                <p> Edit by:<br>
                <div class="criteria">
                    <p>
@@ -73,10 +80,10 @@
                </p>
                <p><input id="edit_name" name="edit_name" type="text"/><br></p>
                <p>
-                   <input id="button3" type="submit" value="      Save      ">
-                   <input id="Reset" type="reset" value="     Reset     ">
-                   <input id="btnClose2" class="btnClose" type="button" value="     Close     ">
+                   <ul id="Alist">
+                   </ul>
                </p>
+
            </form>
       </div>
 
