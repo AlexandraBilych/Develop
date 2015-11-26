@@ -165,7 +165,7 @@ def book():
         db.session.commit()
         flash('New book: "' + book_name + '" was added in the library!')
 
-    book = db.session.query(Book).filter(func.lower(Book.name) == (book_name)).first()
+    book = db.session.query(Book).filter(func.lower(Book.name) == func.lower(book_name)).first()
 
     if author_name is "":
         pass
