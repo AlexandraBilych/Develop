@@ -134,6 +134,7 @@ def author():
 
     if not db.session.query(Author).filter(func.lower(Author.name) == func.lower(author_name)).first():
         db.session.add(Author(author_name))
+        db.session.commit()
         flash('New author: "' + author_name + '" was added in the library!')
 
     author = db.session.query(Author).filter(func.lower(Author.name) == func.lower(author_name)).first()
@@ -143,6 +144,7 @@ def author():
     else:
         if not db.session.query(Book).filter(func.lower(Book.name) == func.lower(book_name)).first():
             db.session.add(Book(book_name))
+            db.session.commit()
             flash('New book: "' + book_name + '" was added in the library!')
 
         book = db.session.query(Book).filter(func.lower(Book.name) == func.lower(book_name)).first()
@@ -160,6 +162,7 @@ def book():
 
     if not db.session.query(Book).filter(func.lower(Book.name) == func.lower(book_name)).first():
         db.session.add(Book(book_name))
+        db.session.commit()
         flash('New book: "' + book_name + '" was added in the library!')
 
     book = db.session.query(Book).filter(func.lower(Book.name) == (book_name)).first()
@@ -169,6 +172,7 @@ def book():
     else:
         if not db.session.query(Author).filter(func.lower(Author.name) == func.lower(author_name)).first():
             db.session.add(Author(author_name))
+            db.session.commit()
             flash('New author: "' + author_name + '" was added in the library!')
 
         author = db.session.query(Author).filter(func.lower(Author.name) == func.lower(author_name)).first()
