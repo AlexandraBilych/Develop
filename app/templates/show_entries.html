@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h3>&nbsp;</h3>
+
+  <div id="left"><p>
+      <form action="/search" method="post" id = 'Search' autocomplete="off"><br>
+          {{SearchForm.hidden_tag()}}
+          <p>
+              <input id="button1" type="submit" value="Search" >
+          </p>
+          <p>Search criteria:<br>
+              {{SearchForm.criterion}}
+          </p>
+              <p id=SearchForm.search> {{SearchForm.search}}
+              </p>
+              <datalist id="searchlist">
+              </datalist><br>
+              {% if error %}
+                  <p class=error><strong>Error:</strong> {{ error }}</p>
+              {% endif %}
+      </form>
+  </div>
+
+  <div id="right"><br>
+       {% with messages = get_flashed_messages() %}
+           {% if messages %}
+               <div class="flashes">
+                   {% for message in messages %}
+                       <p>{{ message }}</p>
+                   {% endfor %}
+               </div>
+           {% endif %}
+       {% endwith %}
+
+      <p>
+          <input type="button" class="popup" id="Rem" value=" Remove "/>
+          <input type="button" class="popup" id="Edit" value="   Edit   " />
+          <input type="button" class="popup" id="Add_author" value="  Add author  " />
+          <input type="button" class="popup" id="Add_book" value="  Add book  "  />
+      </p>
+
+      <div id="background" class='background_window'></div>
+
+      <div class='dialog_window' id="Window_rem">
+          <form id="RemoveForm" method="post" action="/remove" autocomplete="off">
+              {{SearchForm.hidden_tag()}}
+              <p>Remove by:</p>
+              {{RemoveForm.rem_criterion}}
+              <p>Please, enter the name:</p>
+              <p>
+                  <p id=RemoveForm.rem_name> {{RemoveForm.rem_name}}
+                  </p>
+                  <datalist id="removelist">
+                  </datalist>
+              </p>
+              <p>
+                  <input id="button2" type="submit" value="  Remove" >
+                  <input id="btnClose1" class="btnClose" type="button" value="    Close    ">
+              </p>
+          </form>
+      </div>
+
+      <div class='dialog_window' id="Window_edit">
+           <form id="EditForm" action="/edit" method="post" >
+               <p>
+                   <input id="button3" type="submit" value="      Save      ">
+                   <input id="Reset" type="reset" value="     Reset     ">
+                   <input id="btnClose2" class="btnClose" type="button" value="     Close     ">
+               </p>
+               <p> Edit by:<br>
+               <div class="criteria">
+                   <p>
+                       <input type="radio" name="criterion" value="value_book" checked>Book
+                       <input type="radio" name="criterion" value="value_author">Author
+                   </p>
+               </div>
+               <p>
+                   <select class="list" name="list" id="list">
+                   </select>
+               </p>
+               <p><input id="edit_name" name="edit_name" type="text"/><br></p>
+               <p>
+                   <ul id="Alist">
+                   </ul>
+               </p>
+
+           </form>
+      </div>
+
+      <div class='dialog_window' id="Window_aadd">
+          <form id="AAddForm" action="/add_author" method="post" >
+              <p> Enter a new or existing name of the author:</p>
+              <p><input id="aadd_name" name="aadd_name" type="text" list="authorlist" autocomplete="off" required/></p>
+              <datalist id="authorlist">
+              </datalist>
+              <p>You can add an existing book for the author:</p>
+              <p>
+                <input id="book_list" name="book_list" type="text" list="books" autocomplete="off" />
+                <datalist id="books">
+                </datalist>
+              </p>
+              <p>
+                  <input id="button5" type="submit" value="     Save     " style="margin-right: 15px;">
+                  <input id="btnClose4" class="btnClose" type="button" value="     Close     " >
+              </p>
+          </form>
+      </div>
+
+      <div class='dialog_window' id="Window_badd">
+          <form id="BAddForm" action="/add_book" method="post" >
+              <p> Enter a new or existing label of the book:</p>
+              <p><input id="badd_name" name="badd_name" type="text" list="booklist" autocomplete="off" required/></p>
+              <datalist id="booklist">
+              </datalist>
+              <p>You can add an existing author for the book:</p>
+              <p>
+                  <input id="author_list" name="author_list" type="text" list="authors" autocomplete="off" />
+                  <datalist id="authors">
+                  </datalist>
+              </p>
+              <p>
+                  <input id="button7" type="submit" value="     Save     " style="margin-right: 15px;">
+                  <input id="btnClose6" class="btnClose" type="button" value="     Close     "><br>
+              </p>
+          </form>
+      </div>
+
+      <ull class=SearchBook>
+          <ol>
+              {% for entry in SearchBook %}
+                  <tr>
+                      <li>
+                          <td>
+                              <em>"{{entry['b_name']}}"</em><br>
+                              {% for a in entry['a_name'] %}
+                                  <p>{{ a }}</p>
+                              {% endfor %}
+                          </td>
+                      </li><br>
+                  </tr>
+              {% endfor %}
+          </ol>
+      </ull>
+
+      <ull class=SearchAuthor>
+          <ol>
+              {% for entry in SearchAuthor %}
+                  <tr>
+                      <li>
+                          <td>
+                              <em>"{{entry['a_name']}}"</em><br>
+                              {% for b in entry['b_name'] %}
+                                  <p>{{ b }}</p>
+                              {% endfor %}
+                          </td>
+                      </li><br>
+                  </tr>
+              {% endfor %}
+          </ol>
+      </ull>
+
+  </div>
+
+
+<script>
+    $("#RemoveForm").validate();
+    $("#Search").validate();
+    $("#AAddForm").validate();
+</script>
+
+{% endblock %}
